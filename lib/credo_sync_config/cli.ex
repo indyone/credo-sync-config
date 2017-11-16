@@ -1,7 +1,16 @@
 defmodule CredoSyncConfig.CLI do
+  @moduledoc """
+  Contains functions for syncing a Credo configuration file.
+  """
 
+  @doc """
+  Returns the .credo.exs path for this project.
+  """
   def get_config_path(filename \\ ".credo.exs"), do: Path.join([File.cwd!(), filename])
 
+  @doc """
+  Downloads from a new URL, a .credo.exs file and saves it in the local project.
+  """
   def sync_from_url(config_path, url) do
     with \
       {:ok, content} <- download(url),
@@ -13,6 +22,9 @@ defmodule CredoSyncConfig.CLI do
     end
   end
 
+  @doc """
+  Updates an existing .credo.exs (created by this task previously).
+  """
   def sync_from_existing_config(config_path) do
     with \
       {:ok, url} <- extract_url(config_path),

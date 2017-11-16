@@ -16,6 +16,8 @@ defmodule CredoSyncConfig.Mixfile do
   end
 
   defp deps do
-    []
+    [
+      {:credo, "~> 0.8", only: [:dev, :test], runtime: false}
+    ]
   end
 end
